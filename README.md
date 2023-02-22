@@ -22,3 +22,22 @@
     name := "jihye"
 ```
 - 축약된 방식으로 변수를 선언하면 go 가 자동으로 type 을 찾아주지만, 정해진 type 을 임의로 변경할 수 없다
+
+## 1.3 Functions
+> Go 는 생성된 변수 또는 함수가 사용되지 않으면 컴파일 에러를 발생시킨다
+
+### Function
+- multiple value 를 반환하는 function  에서 하나의 값만 return 받으면 에러  
+    -> 하나를 생략하고 싶다면 '_'(underscore) 를 넣어준다
+
+### Argument
+- 반복하는 Function
+- 여러개의 인자값을 한번에 받을 때 사용
+- 인자의 타입앞에 '...' 추가하면 배열처럼 사용할 수 있음 
+
+### NAKED return
+- return 할 변수를 명시하지 않고 return 하는 것
+
+### defer
+- function 이 끝났을 때 추가적으로 다른 동작을 더 할 수 있게 해줌  
+  ex) 함수 실행 후 API 호출, 파일 생성 후 열기 등등
