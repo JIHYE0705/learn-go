@@ -1,1 +1,1 @@
-# Go-Lang 연습 repo
+# start Golang
