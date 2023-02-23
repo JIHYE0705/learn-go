@@ -134,3 +134,12 @@ type 구조체이름 struct {
 - `method` 는 존재한다
 - `struct` 의 `constructor` 가 존재하지 않음
 - 필드를 public 으로 접근하고싶다면 필드 이름을 대문자로 시작해야한다
+
+## 2.1 Methods
+- `method` 는 `struct` 내부가 아닌 외부에 `func` 을 만드는데, func 과 함수이름 사이에 `receiver` 를 넣어준다
+```go
+func (receiver) 함수이름 (파라미터) {
+	로직
+}
+```
+- `receiver` 는 해당 `struct` 이름의 첫글자를 따서 소문자로 만든다
