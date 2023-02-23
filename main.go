@@ -35,6 +35,14 @@ func superAdd(numbers ...int) int {
 	return total
 }
 
+func canIDrink(age int) bool {
+	if koreanAge := age + 2; koreanAge < 18 {
+		return false
+	}
+
+	return true
+}
+
 func main() {
 	name := "jihye"
 	// var name string = "jihye" 위의 방법과 동일
@@ -52,4 +60,6 @@ func main() {
 
 	result := superAdd(1, 2, 3, 4, 5, 6)
 	fmt.Println(result)
+
+	fmt.Println(canIDrink(16))
 }
