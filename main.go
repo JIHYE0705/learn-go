@@ -89,4 +89,12 @@ func main() {
 
 	namesSlice = append(namesSlice, "jisu")
 	fmt.Println(namesSlice)
+
+	jihye := map[string]string{"name": "jihye", "age": "12"}
+
+	for _, value := range jihye {
+		fmt.Println(value)
+	}
+
+	fmt.Println(jihye)
 }
