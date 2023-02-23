@@ -80,4 +80,13 @@ func main() {
 	*b = 20
 
 	fmt.Println(a)
+
+	namesArray := [5]string{"jihye", "jisu", "zzol"}
+	fmt.Println(namesArray)
+
+	namesSlice := []string{"jihye"}
+	fmt.Println(namesSlice)
+
+	namesSlice = append(namesSlice, "jisu")
+	fmt.Println(namesSlice)
 }
