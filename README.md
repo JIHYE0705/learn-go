@@ -46,4 +46,6 @@
 - Go 에서 loop 는 for 만 사용이 가능하다
 - `.forEach`, `.map`, `for in` 모두 사용 불가
 - `range` 는 오로지 `for` 안에서만 동작
-- 
+    > #### range
+    > - `range` 는 배열에 loop 를 적용할 수 있도록 한다
+    > - `range` 는 값을 주는것이 아닌 배열의 index 를 반환 한다
