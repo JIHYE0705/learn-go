@@ -133,3 +133,4 @@ type 구조체이름 struct {
 - `Go` 에는 `class` 또는 `object` 가 존재하지 않고 struct 가 그 역할을 한다 
 - `method` 는 존재한다
 - `struct` 의 `constructor` 가 존재하지 않음
+- 필드를 public 으로 접근하고싶다면 필드 이름을 대문자로 시작해야한다
