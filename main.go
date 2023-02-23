@@ -74,4 +74,10 @@ func main() {
 	fmt.Println(canIDrink(16))
 
 	fmt.Println(canIDrinkSwitch(18))
+
+	a := 2
+	b := &a
+	*b = 20
+
+	fmt.Println(a)
 }
