@@ -1,4 +1,4 @@
-# Go-Lang 연습 repo
+# start Golang
 
 ## 1.1 Packages and Imports
 ### method 이름이 대문자로 시작하는 경우와 소문자로 시작하는 경우가 존재
