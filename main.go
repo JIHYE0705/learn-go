@@ -43,6 +43,16 @@ func canIDrink(age int) bool {
 	return true
 }
 
+func canIDrinkSwitch(age int) bool {
+	switch koreanAge := age + 2; koreanAge {
+	case 10:
+		return false
+	case 18:
+		return true
+	}
+	return false
+}
+
 func main() {
 	name := "jihye"
 	// var name string = "jihye" 위의 방법과 동일
@@ -62,4 +72,6 @@ func main() {
 	fmt.Println(result)
 
 	fmt.Println(canIDrink(16))
+
+	fmt.Println(canIDrinkSwitch(18))
 }

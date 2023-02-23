@@ -64,3 +64,15 @@ if 변수선언; 조건 {
 	소스코드
 }
 ```
+
+## 1.6 Switch
+- 소괄호 없이 사용한다
+```go
+switch 변수 {
+case 조건1:
+	return 
+case 조건2:
+	return
+}
+```
+- `if-else` 나 `if-else if` 가 난무하는 경우를 피할 수 있다
