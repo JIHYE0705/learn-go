@@ -53,6 +53,12 @@ func canIDrinkSwitch(age int) bool {
 	return false
 }
 
+type person struct {
+	name    string
+	age     int
+	favFood []string
+}
+
 func main() {
 	name := "jihye"
 	// var name string = "jihye" 위의 방법과 동일
@@ -97,4 +103,14 @@ func main() {
 	}
 
 	fmt.Println(jihye)
+
+	favFood := []string{"kimchi", "ramen"}
+	jisu := person{"jisu", 16, favFood}
+
+	fmt.Println(jisu)
+	fmt.Println(jisu.name)
+
+	zzol := person{name: "zzol", age: 10, favFood: favFood}
+	fmt.Println(zzol)
+
 }
