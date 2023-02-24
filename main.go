@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/JIHYE0705/learngo/accounts"
+	"github.com/JIHYE0705/learngo/mydict"
 )
 
 func main() {
@@ -12,4 +13,5 @@ func main() {
 
 	fmt.Println(account)
 
+	dictionary := mydict.Dictionary{}
 }

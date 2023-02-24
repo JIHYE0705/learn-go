@@ -146,3 +146,10 @@ func (receiver) 함수이름 (파라미터) {
 - `Go` 는 `try-catch`, `exception` 등을 직접 핸들링 해주어야한다
 - `nil` 은 java, python 의 `null` 과 같음
 - `string()` method 는 `Go` 에서 기본으로 제공해주는 method 이고 override 가능함
+
+## 2.4 type
+```go
+type Dictionary map[string] string {    // type 자료형의 별칭(alias) 자료형
+	
+}
+```
