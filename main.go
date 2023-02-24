@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/JIHYE/learngo/accounts"
+	"github.com/JIHYE0705/learngo/accounts"
 )
 
 func main() {
