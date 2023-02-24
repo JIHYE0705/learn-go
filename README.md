@@ -133,3 +133,23 @@ type 구조체이름 struct {
 - `Go` 에는 `class` 또는 `object` 가 존재하지 않고 struct 가 그 역할을 한다 
 - `method` 는 존재한다
 - `struct` 의 `constructor` 가 존재하지 않음
+- 필드를 public 으로 접근하고싶다면 필드 이름을 대문자로 시작해야한다
+
+## 2.1-3 Methods
+- `method` 는 `struct` 내부가 아닌 외부에 `func` 을 만드는데, func 과 함수이름 사이에 `receiver` 를 넣어준다
+```go
+func (receiver) 함수이름 (파라미터) {
+	로직
+}
+```
+- `receiver` 는 해당 `struct` 이름의 첫글자를 따서 소문자로 만든다
+- `Go` 는 `try-catch`, `exception` 등을 직접 핸들링 해주어야한다
+- `nil` 은 java, python 의 `null` 과 같음
+- `string()` method 는 `Go` 에서 기본으로 제공해주는 method 이고 override 가능함
+
+## 2.4 type
+```go
+type Dictionary map[string] string {    // type 자료형의 별칭(alias) 자료형
+	
+}
+```
