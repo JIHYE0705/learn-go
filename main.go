@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-type result struct {
+type requestResult struct {
 	url    string
 	status string
 }
@@ -53,8 +53,8 @@ func main() {
 		fmt.Println(dictionary.Search(baseWord))
 	*/
 
-	// results := make(map[string]string)
-	c := make(chan result)
+	results := make(map[string]string)
+	c := make(chan requestResult)
 
 	urls := []string{
 		"https://www.airbnb.com/",
@@ -69,6 +69,15 @@ func main() {
 	}
 	for _, url := range urls {
 		go hitURL(url, c)
+	}
+
+	for i := 0; i < len(urls); i++ {
+		result := <-c
+		results[result.url] = result.status
+	}
+
+	for url, status := range results {
+		fmt.Println(url, status)
 	}
 
 	/*
@@ -86,15 +95,14 @@ func main() {
 	*/
 }
 
-func hitURL(url string, c chan<- result) {
-	fmt.Println("Checking:", url)
+func hitURL(url string, c chan<- requestResult) {
 	response, err := http.Get(url)
 	status := "OK"
 
 	if err != nil || response.StatusCode >= 400 {
 		status = "FAILED"
 	}
-	c <- result{url: url, status: status}
+	c <- requestResult{url: url, status: status}
 
 }
 
