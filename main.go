@@ -2,108 +2,109 @@ package main
 
 import (
 	"fmt"
-	"time"
+	"net/http"
 )
 
-/*
-	var errRequestFailed = errors.New("request failed")
-*/
+type result struct {
+	url    string
+	status string
+}
+
+// var errRequestFailed = errors.New("request failed")
 
 func main() {
 	/*
-			account := accounts.NewAccount("jihye")
+		account := accounts.NewAccount("jihye")
 
-			account.Deposit(10)
+		account.Deposit(10)
 
-			fmt.Println(account)
+		fmt.Println(account)
 
-			dictionary := mydict.Dictionary{}
+		dictionary := mydict.Dictionary{}
 
-			word := "hello"
-			definition := "Greeting"
+		word := "hello"
+		definition := "Greeting"
 
-			err := dictionary.Add(word, definition)
-			if err != nil {
-				fmt.Println(err)
-			}
-
-			hello, _ := dictionary.Search(word)
-			fmt.Println("found:", word, "definition:", hello)
-
-			err2 := dictionary.Add(word, definition)
-			if err2 != nil {
-				fmt.Println(err2)
-			}
-			baseWord := "hello"
-			dictionary.Add(baseWord, "First")
-			err := dictionary.Update(baseWord, "Second")
-			if err != nil {
-				fmt.Println(err)
-			}
-			word, _ := dictionary.Search(baseWord)
-			fmt.Println(word)
-
-			err1 := dictionary.Delete(baseWord)
-			if err1 != nil {
-				fmt.Println(err1)
-			}
-			fmt.Println(dictionary.Search(baseWord))
-
-			var results = make(map[string]string)
-			urls := []string{
-				"https://www.airbnb.com/",
-				"https://www.google.com/",
-				"https://www.amazon.com/",
-				"https://www.redit.com/",
-				"https://www.google.com/",
-				"https://soundcloud.com/",
-				"https://www.facebook.com/",
-				"https://www.instagram.com/",
-				"https://academy.nomadcoders.co/",
-			}
-
-			for _, url := range urls {
-				result := "OK"
-				err := hitURL(url)
-
-				if err != nil {
-					result = "FAILED"
-				}
-				results[url] = result
-			}
-			for url, result := range results {
-				fmt.Println(url, result)
-			}
+		err := dictionary.Add(word, definition)
+		if err != nil {
+			fmt.Println(err)
 		}
 
-		func hitURL(url string) error {
-			fmt.Println("Checking:", url)
-			response, err := http.Get(url)
-			if err != nil || response.StatusCode >= 400 {
-				fmt.Println(err, response.StatusCode)
-				return errRequestFailed
-			}
-			return nil
+		hello, _ := dictionary.Search(word)
+		fmt.Println("found:", word, "definition:", hello)
+
+		err2 := dictionary.Add(word, definition)
+		if err2 != nil {
+			fmt.Println(err2)
+		}
+		baseWord := "hello"
+		dictionary.Add(baseWord, "First")
+		err := dictionary.Update(baseWord, "Second")
+		if err != nil {
+			fmt.Println(err)
+		}
+		word, _ := dictionary.Search(baseWord)
+		fmt.Println(word)
+
+		err1 := dictionary.Delete(baseWord)
+		if err1 != nil {
+			fmt.Println(err1)
+		}
+		fmt.Println(dictionary.Search(baseWord))
 	*/
 
-	channel := make(chan string)
-	people := [2]string{"jihye", "jisu"}
+	// results := make(map[string]string)
+	c := make(chan result)
 
-	for _, person := range people {
-		go isCute(person, channel)
+	urls := []string{
+		"https://www.airbnb.com/",
+		"https://www.google.com/",
+		"https://www.amazon.com/",
+		"https://www.redit.com/",
+		"https://www.google.com/",
+		"https://soundcloud.com/",
+		"https://www.facebook.com/",
+		"https://www.instagram.com/",
+		"https://academy.nomadcoders.co/",
+	}
+	for _, url := range urls {
+		go hitURL(url, c)
 	}
 
-	for i := 0; i < len(people); i++ {
-		fmt.Println("Waiting for ", i)
-		fmt.Println(<-channel)
+	/*
+		channel := make(chan string)
+		people := [2]string{"jihye", "jisu"}
+
+		for _, person := range people {
+			go isCute(person, channel)
+		}
+
+		for i := 0; i < len(people); i++ {
+			fmt.Println("Waiting for ", i)
+			fmt.Println(<-channel)
+		}
+	*/
+}
+
+func hitURL(url string, c chan<- result) {
+	fmt.Println("Checking:", url)
+	response, err := http.Get(url)
+	status := "OK"
+
+	if err != nil || response.StatusCode >= 400 {
+		status = "FAILED"
 	}
+	c <- result{url: url, status: status}
+
 }
 
-func isCute(person string, channel chan string) {
-	time.Sleep(time.Second * 10)
+/*
+	func isCute(person string, channel chan string) {
+		time.Sleep(time.Second * 10)
 
-	channel <- person + " is Cute"
-}
+		channel <- person + " is Cute"
+	}
+*/
 
 /*
 	func sexyCount(person string) {
