@@ -129,7 +129,6 @@ slice변수 = append(slice변수, 추가하고 싶은 값)
     var results = map[string]string{}
 	// 또는
 	var results = make(map[string]string)
-	
 ```
 
 ## 1.11 Structs
