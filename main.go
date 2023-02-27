@@ -1,12 +1,13 @@
 package main
 
 import (
-	"errors"
 	"fmt"
 	"time"
 )
 
-var errRequestFailed = errors.New("request failed")
+/*
+	var errRequestFailed = errors.New("request failed")
+*/
 
 func main() {
 	/*
@@ -85,22 +86,22 @@ func main() {
 			return nil
 	*/
 
-	channel := make(chan bool)
+	channel := make(chan string)
 	people := [2]string{"jihye", "jisu"}
 
 	for _, person := range people {
 		go isCute(person, channel)
 	}
 
-	fmt.Println(<-channel)
-	fmt.Println(<-channel)
+	for i := 0; i < len(people); i++ {
+		fmt.Println(<-channel)
+	}
 }
 
-func isCute(person string, channel chan bool) {
-	fmt.Println(person)
-	time.Sleep(time.Second * 5)
+func isCute(person string, channel chan string) {
+	time.Sleep(time.Second * 10)
 
-	channel <- true
+	channel <- person + " is Cute"
 }
 
 /*
