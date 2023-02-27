@@ -115,6 +115,22 @@ slice변수 = append(slice변수, 추가하고 싶은 값)
 변수명 := map[key 자료형]value 자료형 {데이터}
 ```
 - range 를 이용한 반복문에서도 사용 가능
+- 초기화 하지 않은 `map` 에 값을 넣으려고 할 경우 컴파일러는 `panic` 이 발생  
+  -> 빈 `map` 을 생성하고 싶다면 `make()` 함수를 이용하여 `map` 생성  
+  -> `nil` 인 `map` 에는 값을 넣을 수가 없음
+
+- panic
+```go
+    var results map[string]string
+    results["hello"] = "HELLO" // -> panic
+```
+- empty map
+```go
+    var results = map[string]string{}
+	// 또는
+	var results = make(map[string]string)
+	
+```
 
 ## 1.11 Structs
 - Object 와 비슷하면서 map 보다 유연함
