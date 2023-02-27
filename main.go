@@ -84,15 +84,30 @@ func main() {
 			}
 			return nil
 	*/
-	go sexyCount("nico")
-	go sexyCount("flynn")
 
-	time.Sleep(time.Second * 5)
-}
+	channel := make(chan bool)
+	people := [2]string{"jihye", "jisu"}
 
-func sexyCount(person string) {
-	for i := 0; i < 10; i++ {
-		fmt.Println(person, "is sexy", i)
-		time.Sleep(time.Second)
+	for _, person := range people {
+		go isCute(person, channel)
 	}
+
+	fmt.Println(<-channel)
+	fmt.Println(<-channel)
 }
+
+func isCute(person string, channel chan bool) {
+	fmt.Println(person)
+	time.Sleep(time.Second * 5)
+
+	channel <- true
+}
+
+/*
+	func sexyCount(person string) {
+		for i := 0; i < 10; i++ {
+			fmt.Println(person, "is sexy", i)
+			time.Sleep(time.Second)
+		}
+	}
+*/
