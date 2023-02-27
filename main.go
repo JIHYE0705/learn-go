@@ -94,7 +94,7 @@ func main() {
 	}
 
 	for i := 0; i < len(people); i++ {
-		fmt.Println("Wating for ", i)
+		fmt.Println("Waiting for ", i)
 		fmt.Println(<-channel)
 	}
 }
