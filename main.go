@@ -1,11 +1,13 @@
 package main
 
 import (
+	"encoding/csv"
 	"fmt"
 	"github.com/PuerkitoBio/goquery"
 	"io"
 	"log"
 	"net/http"
+	"os"
 	"strconv"
 	"strings"
 )
@@ -14,10 +16,11 @@ type extractedJob struct {
 	id       string
 	title    string
 	location string
+	company  string
 	summary  string
 }
 
-var baseURL = "https://www.saramin.co.kr/zf_user/search/recruit?&searchword=java"
+var baseURL = "https://www.saramin.co.kr/zf_user/search/recruit?&searchword=java&company_cd=0%2C1%2C2%2C3%2C4%2C5%2C6%2C7%2C9%2C10&loc_cd=110055%2C110053%2C110057%2C110059%2C110130%2C110150&loc_mcd=106000&panel_type=&search_optional_item=y&search_done=y&panel_count=y&preview=y"
 
 func main() {
 	var jobs []extractedJob
@@ -28,14 +31,33 @@ func main() {
 		jobs = append(jobs, extractedJobs...)
 	}
 
-	fmt.Println(jobs)
+	writeJobs(jobs)
+	fmt.Println("Done, extracted", len(jobs))
+}
+
+func writeJobs(jobs []extractedJob) {
+	file, err := os.Create("jobs.csv")
+	checkErr(err)
+
+	w := csv.NewWriter(file)
+	defer w.Flush()
+
+	headers := []string{"ID", "Title", "Location", "Company", "Summary"}
+
+	wErr := w.Write(headers)
+	checkErr(wErr)
+
+	for _, job := range jobs {
+		jobSlice := []string{"https://www.saramin.co.kr/zf_user/jobs/relay/view?isMypage=no&rec_idx=" + job.id, job.title, job.location, job.company, job.summary}
+		jwErr := w.Write(jobSlice)
+		checkErr(jwErr)
+	}
+
 }
 
 func getPage(page int) []extractedJob {
 	var jobs []extractedJob
-	pageURL := baseURL + "&recruitPage=" + strconv.Itoa(page) + "&recruitSort=relation&recruitPageCount=40" +
-		"&inner_com_type=&company_cd=0%2C1%2C2%2C3%2C4%2C5%2C6%2C7%2C9%2C10" +
-		"&show_applied=&quick_apply=&except_read=&ai_head_hunting=&mainSearch=n"
+	pageURL := baseURL + "&recruitPage=" + strconv.Itoa(page)
 	fmt.Println("Requesting", pageURL)
 
 	res, err := http.Get(pageURL)
@@ -67,12 +89,14 @@ func extractJob(card *goquery.Selection) extractedJob {
 	id, _ := card.Attr("value")
 	title := cleanString(card.Find(".job_tit>a").Text())
 	location := cleanString(card.Find(".job_condition>span>a").Text())
+	company := cleanString(card.Find(".corp_name>a").Text())
 	summary := cleanString(card.Find(".job_sector>b>a").Text()) + cleanString(card.Find(".job_sector>a").Text())
 
 	return extractedJob{
 		id:       id,
 		title:    title,
 		location: location,
+		company:  company,
 		summary:  summary}
 
 }
