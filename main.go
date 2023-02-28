@@ -133,6 +133,8 @@ func writeJobs(jobs []extractedJob) {
 
 	for _, job := range jobs {
 		jobSlice := []string{"https://www.saramin.co.kr/zf_user/jobs/relay/view?isMypage=no&rec_idx=" + job.id, job.title, job.location, job.company, job.summary}
+
+		// 여기를 go routines 으로 구현하면 더 빨라지지만 현 상태로는 panic 에 빠지게 됨
 		jwErr := w.Write(jobSlice)
 		checkErr(jwErr)
 	}
