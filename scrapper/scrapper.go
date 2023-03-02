@@ -124,6 +124,13 @@ func writeJobs(jobs []extractedJob) {
 	file, err := os.Create("jobs.csv")
 	checkErr(err)
 
+	utf8bom := []byte{0xEF, 0xBB, 0xBF}
+
+	_, err = file.Write(utf8bom)
+	if err != nil {
+		return
+	}
+
 	w := csv.NewWriter(file)
 	defer w.Flush()
 
